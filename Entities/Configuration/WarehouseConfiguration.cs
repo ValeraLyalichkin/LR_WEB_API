@@ -9,20 +9,20 @@ using System.Threading.Tasks;
 
 namespace Entities.Configuration
 {
-    public class WarehousesConfiguration : IEntityTypeConfiguration<Warehouses>
+    public class WarehousesConfiguration : IEntityTypeConfiguration<Warehouse>
     {
-        public void Configure(EntityTypeBuilder<Warehouses> builder)
+        public void Configure(EntityTypeBuilder<Warehouse> builder)
         {
             builder.HasData
             (
-            new Warehouses
+            new Warehouse
             {
                 Id = new Guid("8615e23f-2548-4ef7-a440-af6edc214fb0"),
                 GoodName = "Tuning headlights for VAZ 2110",
                 Count = 4,
                 Price = 13490.0
             },
-            new Warehouses
+            new Warehouse
             {
                 Id = new Guid("713a847a-2875-469d-aefb-fd7bb283a8d4"),
                 GoodName = "Diode PTFs Sal-Man 60w 5 strips on VAZ 2110)",

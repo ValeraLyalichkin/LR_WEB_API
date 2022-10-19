@@ -9,13 +9,13 @@ using System.Threading.Tasks;
 
 namespace Entities.Configuration
 {
-    public class OrdersConfiguration : IEntityTypeConfiguration<Orders>
+    public class OrdersConfiguration : IEntityTypeConfiguration<Order>
     {
-        public void Configure(EntityTypeBuilder<Orders> builder)
+        public void Configure(EntityTypeBuilder<Order> builder)
         {
             builder.HasData
             (
-            new Orders
+            new Order
             {
                 Id = new Guid("86abbca8-664d-4b20-b5de-024705497d4a"),
                 Cost = 20.1,
@@ -23,7 +23,7 @@ namespace Entities.Configuration
                 Date = 12102022,
                 WarehouseId = new Guid("8615e23f-2548-4ef7-a440-af6edc214fb0")
             },
-            new Orders
+            new Order
             {
                 Id = new Guid("87abbca8-664d-4b20-b5de-024705497d4a"),
                 Cost = 203.1,
@@ -31,7 +31,7 @@ namespace Entities.Configuration
                 Date = 12102022,
                 WarehouseId = new Guid("8615e23f-2548-4ef7-a440-af6edc214fb0")
             },
-            new Orders
+            new Order
             {
                 Id = new Guid("88abbca8-664d-4b20-b5de-024705497d4a"),
                 Cost = 210.1,

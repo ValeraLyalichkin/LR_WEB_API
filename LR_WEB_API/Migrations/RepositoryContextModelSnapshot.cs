@@ -120,7 +120,7 @@ namespace LR_WEB_API.Migrations
                         });
                 });
 
-            modelBuilder.Entity("Entities.Models.Orders", b =>
+            modelBuilder.Entity("Entities.Models.Order", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
@@ -146,7 +146,7 @@ namespace LR_WEB_API.Migrations
 
                     b.HasIndex("WarehouseId");
 
-                    b.ToTable("Orders");
+                    b.ToTable("Order");
 
                     b.HasData(
                         new
@@ -175,7 +175,7 @@ namespace LR_WEB_API.Migrations
                         });
                 });
 
-            modelBuilder.Entity("Entities.Models.Warehouses", b =>
+            modelBuilder.Entity("Entities.Models.Warehouse", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
@@ -196,7 +196,7 @@ namespace LR_WEB_API.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Warehouses");
+                    b.ToTable("Warehouse");
 
                     b.HasData(
                         new
@@ -226,9 +226,9 @@ namespace LR_WEB_API.Migrations
                     b.Navigation("Company");
                 });
 
-            modelBuilder.Entity("Entities.Models.Orders", b =>
+            modelBuilder.Entity("Entities.Models.Order", b =>
                 {
-                    b.HasOne("Entities.Models.Warehouses", "Warehouse")
+                    b.HasOne("Entities.Models.Warehouse", "Warehouse")
                         .WithMany()
                         .HasForeignKey("WarehouseId")
                         .OnDelete(DeleteBehavior.Cascade)

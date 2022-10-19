@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Entities.Models
 {
-    public class Orders
+    public class Order
     {
         [Column("OrdersId")]
         public Guid Id { get; set; }
@@ -21,8 +21,8 @@ namespace Entities.Models
         [MaxLength(20, ErrorMessage = "Maximum length for the date is 20 characters.")]
         public long Date { get; set; }
 
-        [ForeignKey(nameof(Warehouses))]
+        [ForeignKey(nameof(Models.Warehouse))]
         public Guid WarehouseId { get; set; }
-        public Warehouses Warehouse { get; set; }
+        public Warehouse Warehouse { get; set; }
     }
 }

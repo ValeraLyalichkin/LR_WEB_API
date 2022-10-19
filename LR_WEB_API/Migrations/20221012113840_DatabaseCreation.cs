@@ -24,7 +24,7 @@ namespace LR_WEB_API.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Warehouses",
+                name: "Warehouse",
                 columns: table => new
                 {
                     WarehiusesId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
@@ -59,7 +59,7 @@ namespace LR_WEB_API.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Orders",
+                name: "Order",
                 columns: table => new
                 {
                     OrdersId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
@@ -74,7 +74,7 @@ namespace LR_WEB_API.Migrations
                     table.ForeignKey(
                         name: "FK_Orders_Warehouses_WarehouseId",
                         column: x => x.WarehouseId,
-                        principalTable: "Warehouses",
+                        principalTable: "Warehouse",
                         principalColumn: "WarehiusesId",
                         onDelete: ReferentialAction.Cascade);
                 });
@@ -89,7 +89,7 @@ namespace LR_WEB_API.Migrations
                 });
 
             migrationBuilder.InsertData(
-                table: "Warehouses",
+                table: "Warehouse",
                 columns: new[] { "WarehiusesId", "Count", "GoodName", "Price" },
                 values: new object[,]
                 {
@@ -108,7 +108,7 @@ namespace LR_WEB_API.Migrations
                 });
 
             migrationBuilder.InsertData(
-                table: "Orders",
+                table: "Order",
                 columns: new[] { "OrdersId", "Cost", "Date", "Goods", "WarehouseId" },
                 values: new object[,]
                 {
@@ -124,7 +124,7 @@ namespace LR_WEB_API.Migrations
 
             migrationBuilder.CreateIndex(
                 name: "IX_Orders_WarehouseId",
-                table: "Orders",
+                table: "Order",
                 column: "WarehouseId");
         }
 
@@ -134,13 +134,13 @@ namespace LR_WEB_API.Migrations
                 name: "Employees");
 
             migrationBuilder.DropTable(
-                name: "Orders");
+                name: "Order");
 
             migrationBuilder.DropTable(
                 name: "Companies");
 
             migrationBuilder.DropTable(
-                name: "Warehouses");
+                name: "Warehouse");
         }
     }
 }

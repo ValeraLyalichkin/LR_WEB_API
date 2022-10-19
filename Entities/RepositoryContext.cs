@@ -24,8 +24,8 @@ namespace Entities
         }
         public DbSet<Company> Companies { get; set; }
         public DbSet<Employee> Employees { get; set; }
-        public DbSet<Warehouses> Warehouses { get; set; }
-        public DbSet<Orders> Orders { get; set; }
+        public DbSet<Warehouse> Warehouses { get; set; }
+        public DbSet<Order> Orders { get; set; }
    
     
     }
