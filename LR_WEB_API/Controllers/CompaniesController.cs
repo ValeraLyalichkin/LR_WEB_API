@@ -25,7 +25,7 @@ namespace CompanyEmployees.Controllers
         public IActionResult GetCompanies()
         {
 
-                throw new Exception("Exception");
+                //throw new Exception("Exception");
                 var companies = _repository.Company.GetAllCompanies(trackChanges:false);
                 var companiesDto = _mapper.Map<IEnumerable<CompanyDto>>(companies);
                 return Ok(companiesDto);
