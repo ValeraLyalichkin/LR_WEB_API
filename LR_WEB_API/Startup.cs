@@ -1,5 +1,7 @@
-﻿using LR_WEB_API.Extensions;
+﻿using Contracts;
+using LR_WEB_API.Extensions;
 using Microsoft.AspNetCore.HttpOverrides;
+using Microsoft.Extensions.Logging;
 using NLog;
 //using ShopApi.Extensions;
 
@@ -22,13 +24,18 @@ public class Startup
         services.ConfigureCors();
         services.ConfigureIISIntegration();
         services.ConfigureLoggerService();
+        services.ConfigureSqlContext(Configuration);
+        services.ConfigureRepositoryManager();
         services.AddControllers();
         services.AddEndpointsApiExplorer();
         services.AddSwaggerGen();
+        services.AddAutoMapper(typeof(Startup));
+
     }
 
     // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-    public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
+    public void Configure(IApplicationBuilder app, IWebHostEnvironment env,
+    ILoggerManager logger)
     {
         if (env.IsDevelopment())
         {
@@ -36,7 +43,7 @@ public class Startup
             app.UseSwagger();
             app.UseSwaggerUI();
         }
-
+        app.ConfigureExceptionHandler(logger);
         app.UseHttpsRedirection();
         app.UseStaticFiles();
         app.UseCors("CorsPolicy");
