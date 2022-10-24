@@ -25,17 +25,14 @@ namespace EmployeeEmployees.Controllers
         [HttpGet]
         public IActionResult GetEmployee()
         {
-            try
-            {
+            
+            
                 var employee = _repository.Employee.GetAllEmployee(trackChanges:false);
                 var employeeDto = _mapper.Map<IEnumerable<EmployeeDto>>(employee);
                 return Ok(employeeDto);
-            }
-            catch (Exception ex)
-            {
-                _logger.LogError($"Something went wrong in the { nameof(GetEmployee)} action { ex}");
-            return StatusCode(500, "Internal server error");
-            }
+           
+                
+            
         }
     }
 }
