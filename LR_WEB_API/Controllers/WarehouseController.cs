@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using Contracts;
 using Entities.DataTransferObjects;
+using Entities.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -31,7 +32,7 @@ namespace LR_WEB_API.Controllers
            
         }
 
-        [HttpGet("{id}")]
+        [HttpGet("{id}", Name = "WarehouseById")]
         public IActionResult GetWarehouse(Guid id)
         {
             var warehouse = _repository.Warehouse.GetWarehouse(id, trackChanges: false);
@@ -45,6 +46,22 @@ namespace LR_WEB_API.Controllers
                 var warehouseDto = _mapper.Map<WarehouseDto>(warehouse);
                 return Ok(warehouseDto);
             }
+        }
+
+        [HttpPost]
+        public IActionResult CreateWarehouse([FromBody] WarehouseForCreationDto warehouse)
+        {
+            if (warehouse == null)
+            {
+                _logger.LogError("WarehouseForCreationDto object sent from client is null.");
+            return BadRequest("WarehouseForCreationDto object is null");
+            }
+            var warehouseEntity = _mapper.Map<Warehouse>(warehouse);
+            _repository.Warehouse.CreateWarehouse(warehouseEntity);
+            _repository.Save();
+            var warehouseToReturn = _mapper.Map<WarehouseDto>(warehouseEntity);
+            return CreatedAtRoute("WarehouseById", new { id = warehouseToReturn.Id },
+            warehouseToReturn);
         }
     }
 }

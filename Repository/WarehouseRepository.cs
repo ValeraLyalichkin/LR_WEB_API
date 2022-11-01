@@ -22,6 +22,8 @@ namespace Repository
 
         public Warehouse GetWarehouse(Guid warehouseId, bool trackChanges) 
             => FindByCondition(c => c.Id.Equals(warehouseId), trackChanges).SingleOrDefault();
+
+        public void CreateWarehouse(Warehouse warehouse) => Create(warehouse);
     }
 
 }

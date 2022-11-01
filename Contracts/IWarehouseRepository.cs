@@ -11,5 +11,7 @@ namespace Contracts
     {
         IEnumerable<Warehouse> GetAllWarehouse(bool trackChanges);
         Warehouse GetWarehouse(Guid warehouseId, bool trackChanges);
+        void CreateWarehouse(Warehouse warehouse);
+
     }
 }
