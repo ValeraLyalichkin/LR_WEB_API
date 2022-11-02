@@ -48,20 +48,46 @@ namespace LR_WEB_API.Controllers
             }
         }
 
-        [HttpPost]
-        public IActionResult CreateWarehouse([FromBody] WarehouseForCreationDto warehouse)
+
+        [HttpGet("collection/({ids})", Name = "WarehouseCollection")]
+        public IActionResult GetWarehouseCollection(IEnumerable<Guid> ids)
         {
-            if (warehouse == null)
+            if (ids == null)
             {
-                _logger.LogError("WarehouseForCreationDto object sent from client is null.");
-            return BadRequest("WarehouseForCreationDto object is null");
+                _logger.LogError("Parameter ids is null");
+                return BadRequest("Parameter ids is null");
             }
-            var warehouseEntity = _mapper.Map<Warehouse>(warehouse);
-            _repository.Warehouse.CreateWarehouse(warehouseEntity);
+            var warehouseEntities = _repository.Warehouse.GetByIds(ids, trackChanges: false);
+            if (ids.Count() != warehouseEntities.Count())
+            {
+                _logger.LogError("Some ids are not valid in a collection");
+                return NotFound();
+            }
+            var warehouseToReturn =
+           _mapper.Map<IEnumerable<WarehouseDto>>(warehouseEntities);
+            return Ok(warehouseToReturn);
+        }
+
+        [HttpPost("collection")]
+        public IActionResult CreateWarehouseCollection([FromBody]
+        IEnumerable<WarehouseForCreationDto> warehouseCollection)
+        {
+            if (warehouseCollection == null)
+            {
+                _logger.LogError("Warehouse collection sent from client is null.");
+                return BadRequest("Warehouse collection is null");
+            }
+            var warehouseEntities = _mapper.Map<IEnumerable<Warehouse>>(warehouseCollection);
+            foreach (var warehouse in warehouseEntities)
+            {
+                _repository.Warehouse.CreateWarehouse(warehouse);
+            }
             _repository.Save();
-            var warehouseToReturn = _mapper.Map<WarehouseDto>(warehouseEntity);
-            return CreatedAtRoute("WarehouseById", new { id = warehouseToReturn.Id },
-            warehouseToReturn);
+            var warehouseCollectionToReturn =
+            _mapper.Map<IEnumerable<WarehouseDto>>(warehouseEntities);
+            var ids = string.Join(",", warehouseCollectionToReturn.Select(c => c.Id));
+            return CreatedAtRoute("WarehouseCollection", new { ids },
+            warehouseCollectionToReturn);
         }
     }
 }

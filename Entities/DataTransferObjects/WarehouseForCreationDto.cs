@@ -9,9 +9,9 @@ namespace Entities.DataTransferObjects
     public class WarehouseForCreationDto
     {
         public string GoodName { get; set; }
-        public string Count { get; set; }
-        public string Price { get; set; }
-        public IEnumerable<OrderForCreationDto> Order { get; set; }
+        public double Price { get; set; }
+        public int Count { get; set; }
+        //public IEnumerable<OrderForCreationDto> Order { get; set; }
 
     }
 }

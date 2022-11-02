@@ -10,6 +10,7 @@ namespace Entities.DataTransferObjects
     {
         public Guid Id { get; set; }
         public string GoodName { get; set; }
-        public string Price { get; set; }
+        public double Price { get; set; }
+        public int Count { get; set; }
     }
 }
