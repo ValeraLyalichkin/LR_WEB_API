@@ -77,8 +77,7 @@ namespace LR_WEB_API.Controllers
             var orderToReturn = _mapper.Map<OrderDto>(orderEntity);
             return CreatedAtRoute("GetOrderForWarehouse", new
             {
-                warehouseId,
-                id = orderToReturn.Id
+                warehouseId, id = orderToReturn.Id
             }, orderToReturn);
         }
     }
