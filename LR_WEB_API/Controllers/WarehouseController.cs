@@ -2,6 +2,7 @@
 using Contracts;
 using Entities.DataTransferObjects;
 using Entities.Models;
+using LR_WEB_API.ModelBinders;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -50,7 +51,7 @@ namespace LR_WEB_API.Controllers
 
 
         [HttpGet("collection/({ids})", Name = "WarehouseCollection")]
-        public IActionResult GetWarehouseCollection(IEnumerable<Guid> ids)
+        public IActionResult GetWarehouseCollection([ModelBinder(BinderType = typeof(ArrayModelBinder))] IEnumerable<Guid> ids)
         {
             if (ids == null)
             {
