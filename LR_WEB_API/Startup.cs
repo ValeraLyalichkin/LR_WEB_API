@@ -26,6 +26,7 @@ public class Startup
     // This method gets called by the runtime. Use this method to add services to the container.
     public void ConfigureServices(IServiceCollection services)
     {
+        services.ConfigureSwagger();
         services.AddScoped<IAuthenticationManager, AuthenticationManager>();
         services.ConfigureJWT(Configuration);
         services.AddAuthentication();
@@ -73,6 +74,12 @@ public class Startup
         app.UseForwardedHeaders(new ForwardedHeadersOptions
         {
             ForwardedHeaders = ForwardedHeaders.All
+        });
+        app.UseSwagger();
+        app.UseSwaggerUI(s =>
+        {
+            s.SwaggerEndpoint("/swagger/v1/swagger.json", "Code Maze API v1");
+            s.SwaggerEndpoint("/swagger/v2/swagger.json", "Code Maze API v2");
         });
 
         app.UseHsts();
