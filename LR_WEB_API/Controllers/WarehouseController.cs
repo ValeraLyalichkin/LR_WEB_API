@@ -11,8 +11,9 @@ using System;
 
 namespace LR_WEB_API.Controllers
 {
-    [Route("api/warehouses")]
+    [Route("api/warehouse")]
     [ApiController]
+    [ApiExplorerSettings(GroupName = "v1")]
     public class WarehouseController : ControllerBase
     {
         private readonly IRepositoryManager _repository;
